@@ -13,19 +13,19 @@ describe("enhancer", () => {
     it("fn fail", () => {});
 
     it("fn repair", () => {
-        expect(enhancer.repair(defaultItem)).toEqual({
+        const expectedItem = {
             ...defaultItem,
             durability: 100,
-        });
+        };
 
-        expect(enhancer.repair({...defaultItem, durability: -10})).toEqual({
-            ...defaultItem,
-            durability: 100,
-        });
+        expect(enhancer.repair(defaultItem)).toEqual(expectedItem);
 
-        expect(enhancer.repair({...defaultItem, durability: 1000})).toEqual({
-            ...defaultItem,
-            durability: 100,
-        });
+        expect(enhancer.repair({ ...defaultItem, durability: -10 })).toEqual(
+            expectedItem
+        );
+    
+        expect(enhancer.repair({ ...defaultItem, durability: 1000 })).toEqual(
+            expectedItem
+        );
     });
 });
