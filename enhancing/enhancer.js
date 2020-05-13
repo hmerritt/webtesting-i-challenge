@@ -6,8 +6,19 @@ module.exports = {
 };
 
 function succeed(item) {
-    if (item.enhancement < 0) item.enhancement = 0; // Stop value going below 0
-    if (item.enhancement < 20) item.enhancement += 1; // Increment if below 20
+    switch (true) {
+        case item.enhancement < 0: // Stop value going below 0
+            item.enhancement = 0;
+            break;
+
+        case item.enhancement < 20: // Increment if below 20
+            item.enhancement += 1;
+            break;
+
+        case item.enhancement > 20: // Keep value at 20
+            item.enhancement = 20;
+            break;
+    }
     return { ...item };
 }
 
