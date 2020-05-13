@@ -40,13 +40,11 @@ describe("enhancer", () => {
         expect(enhancer.fail({ ...defaultItem, enhancement: 15 }))
             .toEqual({ ...defaultItem, enhancement: 15, durability: 40 });
 
+        // If the item's enhancement level is greater than 16,
+        // the enhancement level decreases by 1
+        // (17 goes down to 16, 18 goes down to 17)
         expect(enhancer.fail({ ...defaultItem, enhancement: 17 }))
             .toEqual({ ...defaultItem, durability: 40, enhancement: 16 });
-
-        // expect(enhancer.succeed({ ...defaultItem, enhancement: -10 }).enhancement)
-        //     .toBeGreaterThanOrEqual(0);
-        // expect(enhancer.succeed({ ...defaultItem, enhancement: 200 }).enhancement)
-        //     .toBeLessThanOrEqual(20);
     });
 
     it("fn repair", () => {
