@@ -24,24 +24,22 @@ function succeed(item) {
 
 function fail(item) {
     // Ammount to decrement durability by
-    let decrementBy = 1;
-
-    //
-    switch (true) {
-        case item.enhancement < 15:
-            decrementBy = 5;
-            break;
-
-        case item.enhancement >= 15:
-            decrementBy = 10;
-            break;
-    }
+    let decrementBy = 0;
 
     // decrement durability
-    item.durability -= decrementBy;
+    if (item.enhancement >= 15) {
+        item.durability -= 10;
+    } else {
+        item.durability -= 5;
+    }
+
+    // decrement enhancement
+    if (item.enhancement > 16)
+        item.enhancement -= 1;
 
     // Stop value going below 0
     if (item.durability < 0) item.durability = 0;
+    if (item.enhancement < 0) item.enhancement = 0;
 
     return { ...item };
 }
